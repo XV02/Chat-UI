@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms' 
-import { HttpClient } from '@angular/common/http';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms'
 import { Router } from '@angular/router';
+import { SignupService } from 'src/app/shared/services/signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
+    private signUpService: SignupService,
     private router: Router) {
     this.form = this.formBuilder.group({
       'name':['', Validators.required],
@@ -47,21 +47,16 @@ export class SignupComponent implements OnInit {
     //enviar datos
     if(this.form.valid){
       console.log('enviar datos', this.form);
-      console.log(this.form.value);
-      this.http.post<any>('http://localhost:3000/api/users', {
+      this.signUpService.signUp({
         name: this.form.value.name,
-        email: this.form.value.email,
         password: this.form.value.password,
-        role: 'mortal',
-      }).subscribe({
-        next: (data) => {
-          console.log('data', data);
-          this.router.navigate(['/login']);
-        },
-        error: (err) => {
-          console.log('error', err);
-          this.serverError = true;
-        }
+        email: this.form.value.email,
+      }).then(response => {
+        console.log(response);
+        this.router.navigate(['/login']);
+      }).catch(error => {
+        console.log(error);
+        this.serverError = true;
       });
     }else{
     //datos incompletos

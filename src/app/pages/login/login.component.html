@@ -6,10 +6,13 @@
     </div>
     <div>
         <label for="password">Password: </label>
-        <input type="text" name="password" placeholder="Password" formControlName="password">
+        <input type="password" name="password" placeholder="Password" formControlName="password">
     </div>
     <div>
-        <button [disabled]="form.invalid">Log in</button>
+        <span *ngIf="logInError">Username or password invalid</span>
+    </div>
+    <div>
+        <button [disabled]="form.invalid">Log In</button>
     </div>
     <div>
         Don't have an account? <a routerLink="/signup">Sign up here</a>

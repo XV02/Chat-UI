@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,15 +6,23 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   login(credentials: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          token: 'fake-jwt-token',
-        });
-      }, 1000);
+      this.http.post<any>('http://localhost:3000/api/users/signIn', {
+        name: credentials.name,
+        password: credentials.password,
+      }).subscribe({
+        next: (data) => {
+          resolve({
+            token: data.token
+          });
+        },
+        error: (err) => {
+          reject(err);
+        }
+      });
     });
   }
 }

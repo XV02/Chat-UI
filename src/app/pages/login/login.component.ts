@@ -11,9 +11,9 @@ import { LoginService } from 'src/app/shared/services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup;
+  logInError: boolean = false;
 
-  credentials: any = {};
+  form: FormGroup;
 
   constructor(
     private loginService: LoginService,
@@ -30,12 +30,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('Enviar datos', this.credentials);
-    this.loginService.login(this.credentials).then(response => {
+    console.log('Enviar datos', this.form.value);
+    this.loginService.login({
+      name: this.form.value.name,
+      password: this.form.value.password,
+    }).then(response => {
       this.authService.save(response.token);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/mainPage']);
     }).catch(error => {
       console.log('Login error', error);
+      this.logInError = true;
     });
   }
 }
