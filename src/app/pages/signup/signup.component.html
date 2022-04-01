@@ -25,6 +25,7 @@
                 </div>
                 <span *ngIf="form.errors && form.errors['passwordMismatch']">Passwords don't match</span>
                 <span *ngIf="serverError">Database Error</span>
+                <span *ngIf="repeatedError">User with this email already exists</span>
                 <div>
                         <p>Have an account? <a routerLink="/login">Login</a></p>
                 </div>

@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
 
   serverError: boolean = false;
+  repeatedError: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,7 +57,8 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['/login']);
       }).catch(error => {
         console.log(error);
-        this.serverError = true;
+        if(error.status === 409) this.repeatedError = true;
+        else this.serverError = true;
       });
     }else{
     //datos incompletos
