@@ -1,0 +1,19 @@
+<div>
+<form [formGroup]="form" (submit)="login()">
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" name ="username" placeholder="Username" formControlName="name">
+    </div>
+    <div>
+        <label for="password">Password: </label>
+        <input type="text" name="password" placeholder="Password" formControlName="password">
+    </div>
+    <div>
+        <button [disabled]="form.invalid">Log in</button>
+    </div>
+    <div>
+        Don't have an account? <a routerLink="/signup">Sign up here</a>
+    </div>
+</form>
+
+</div>

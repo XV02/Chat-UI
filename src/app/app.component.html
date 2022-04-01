@@ -1,11 +1,22 @@
 <app-header></app-header>
+<h1 *ngIf="flag">Bienvenido {{persona.nombre}}</h1>
+<!--<h2>Bienvenido {{name}}</h2>-->
 
-<h1>Hola mundo</h1>
-<h2 *ngIf="flag">Bienvenido {{name}}</h2>
-<button (click)="doOnClick()">Click me!</button>
+<!--form (submit)="doOnClick($event)">
+    <input name="movie" type="text" placeholder="text..." [(ngModel)]="SearchValue">
+    <button [disabled]="!SearchValue">Agregar</button>
+</form!-->
 
+<!-- <input type="text" [(ngModel)]="SearchValue" (keyup)="doSearch()"> -->
+
+<!--ul>
+    <li *ngFor="let element of movies">{{element}}</li>
+</ul!-->
+<!-- 
+<h3>Filtrados</h3>
 <ul>
-    <li *ngFor="let movie of movies">{{movie}}</li>
-</ul>
+    <li *ngFor="let element of filteredMovies">{{element}}</li>
+</ul> -->
 
+<router-outlet></router-outlet>
 <app-footer></app-footer>

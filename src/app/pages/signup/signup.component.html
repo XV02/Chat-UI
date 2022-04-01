@@ -1,0 +1,34 @@
+<div>
+        <form [formGroup]="form" (submit)="sendData()">
+                <div>
+                        <input type="text" name="fullname" placeholder="Full name" formControlName="name">
+                </div>
+                <!--div>
+                        <input type="text" name="username" placeholder="Username" formControlName="username">
+                </div-->
+                <div>
+                        <input type="text" name="email" placeholder="Email" formControlName="email">
+                </div>
+                <div>
+                        <input [type]="showPassword ? 'text':'password'" name="password" placeholder="Password" formControlName="password">
+                        <button (click)="toggleShowPassword()">{{showPassword ? 'Hide' : 'Show'}}</button>
+                </div>
+                <div>
+                        <input type="password" name="passwordconfirmed" placeholder="Confirm you password" formControlName="confirm">
+                </div>
+                <div>
+                        <input type="checkbox" name="terms" formControlName="terms">
+                </div>
+                <div>
+                        <button [disabled]="form.invalid">Sign up</button>
+                </div>
+                <span *ngIf="form.errors && form.errors['passwordMismatch']">Passwords don't match</span>
+                <span *ngIf="serverError">Database Error</span>
+                <div>
+                        <p>Have an account? <a routerLink="/login">Login</a></p>
+                </div>
+        </form>
+</div>
+
+
+
